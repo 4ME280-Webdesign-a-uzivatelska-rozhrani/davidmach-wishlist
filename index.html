@@ -39,8 +39,8 @@
   </div>
 
   <script>
-    const BIN_ID = 'TVOJE_BIN_ID'; // ZDE vlož svůj BIN ID
-    const API_KEY = 'TVŮJ_API_KEY'; // ZDE vlož svůj API KEY
+    const BIN_ID = '6830463b8561e97a501a72e2';
+    const API_KEY = '$2a$10$7v4XUXYeaXRof8zv13jvuObZzcc2kf57qsOMqfyRVFg1K5aVBGOT6';
     const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
     const BIN_LATEST = `${BIN_URL}/latest`;
 
@@ -66,11 +66,11 @@
         title.appendChild(link);
 
         const desc = document.createElement('p');
-        desc.textContent = item.description;
+        desc.textContent = item.description || '';
         desc.className = 'mt-2 mb-1 text-muted';
 
         const price = document.createElement('div');
-        price.innerHTML = `<strong>Cena:</strong> ${item.price}`;
+        price.innerHTML = `<strong>Cena:</strong> ${item.price || 'neuvedena'}`;
         price.className = 'mb-2';
 
         const reserved = document.createElement('div');
