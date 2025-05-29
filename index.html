@@ -39,10 +39,7 @@
   </div>
 
   <script>
-    const BIN_ID = '6830463b8561e97a501a72e2';
-    const API_KEY = '$2a$10$7v4XUXYeaXRof8zv13jvuObZzcc2kf57qsOMqfyRVFg1K5aVBGOT6';
-    const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-    const BIN_LATEST = `${BIN_URL}/latest`;
+    const WORKER_URL = 'https://jsonbinworker.machdavid340.workers.dev/';
 
     let data = [];
 
@@ -104,11 +101,10 @@
     }
 
     function updateBin(newData) {
-      fetch(BIN_URL, {
+      fetch(WORKER_URL, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'X-Master-Key': API_KEY
         },
         body: JSON.stringify(newData)
       })
@@ -120,19 +116,15 @@
       .catch(err => alert('❌ Chyba při ukládání: ' + err.message));
     }
 
-    fetch(BIN_LATEST, {
-      headers: {
-        'X-Master-Key': API_KEY
-      }
-    })
-    .then(res => res.json())
-    .then(json => {
-      data = json.record;
-      renderWishlist(data);
-    })
-    .catch(err => {
-      document.getElementById('wishlist').textContent = '❌ Nepodařilo se načíst wishlist: ' + err.message;
-    });
+    fetch(WORKER_URL)
+      .then(res => res.json())
+      .then(json => {
+        data = json.record;
+        renderWishlist(data);
+      })
+      .catch(err => {
+        document.getElementById('wishlist').textContent = '❌ Nepodařilo se načíst wishlist: ' + err.message;
+      });
   </script>
 </body>
 </html>
